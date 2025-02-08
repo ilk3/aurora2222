@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Hero section fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add visibility: hidden to prevent flash of content */
+.hero-part {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Animation class that will be added after background loads */
+.animate-hero {
+  visibility: visible;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+#part1.animate-hero { animation-delay: 1.2s; }
+#part2.animate-hero { animation-delay: 1.5s; }
+#part3.animate-hero { animation-delay: 1.8s; }
+#part4.animate-hero { animation-delay: 2.1s; }
+
+/* Rotating background animation */
+@keyframes spin {
+  from {
+    transform: translate(-10%, -35%) rotate(0deg);
+  }
+  to {
+    transform: translate(-10%, -35%) rotate(360deg);
+  }
+}
+
+/* Card hover effects */
+.hover-card {
+  transition: all 0.3s cubic-bezier(0.17, 0.55, 0.55, 1);
+}
+
+.hover-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(164, 45, 83, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(164, 45, 83, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(164, 45, 83, 0);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+.rotating-background {
+  position: fixed;
+  overflow: visible;
+  width: 200vh;
+  height: 200vh;
+  max-height: 700vh;
+  background-image: url('https://www.dropbox.com/scl/fi/uprwkwfu5gf6zvv6f5rkx/brownRed.avif?rlkey=qmxf66a764gydidkasv61db93&raw=1');
+  background-position: 50% 50%;
+  background-size: 80vh 300vh;
+  background-attachment: fixed;
+  opacity: 0;
+  z-index: -1;
+  transform: translate(-10%, -35%) rotate(0deg);
+  animation: spin 30s linear infinite;
+  filter: blur(58px);
+  transition: opacity 0.5s ease-in;
+}
+
+.background-loaded {
+  opacity: 0.7;
+}
+
+/* Hero section specific styles */
+.hero-text {
+  background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Base font family for paragraphs */
+@layer base {
+  p {
+    font-family: "Poppins", sans-serif;
+    color: #442020;
+    font-weight: 500;
+  }
+
+  /* Remove default scroll-behavior since Lenis handles it */
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Improve default focus styles */
+:focus-visible {
+  outline: 2px solid theme('colors.indigo.500');
+  outline-offset: 2px;
+}
+
+/* Custom backdrop blur for better cross-browser support */
+@supports not (backdrop-filter: blur(12px)) {
+  .backdrop-blur-lg {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* Footer gradient line */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, rgb(164, 45, 83), transparent);
+}
+
+/* Remove previous background from body */
+body {
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Leaflet map styles */
+.leaflet-container {
+  z-index: 1;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+}
+
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.leaflet-popup-content {
+  font-family: "Poppins", sans-serif;
+  color: #442020;
+  font-weight: 500;
+  margin: 0.5rem 1rem;
+}
